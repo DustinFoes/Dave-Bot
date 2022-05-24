@@ -1,4 +1,4 @@
-import discord
+import discord, random
 from discord.ext import commands
 
 client = commands.Bot(command_prefix = '!')
@@ -37,29 +37,19 @@ class commands(commands.Cog):
 	async def git(self, ctx):
 		await ctx.send(f'The Github link is: https://github.com/DustinFoes')
 
-	@client.command(aliases=['Gitrepos', 'Github repos', 'github repos',
-						'repos', 'reposetories'])
+	@client.command(aliases=['Gitrepos', 'Github repos', 'github repos','repos', 'reposetories'])
 	async def gitrepos(self, ctx):
 		await ctx.send(f'Github Repositories: , {repos}')
 
 
 	@client.command()
-	async def clear(self, ctx, amount=10):
-		await ctx.channel.purge(limit=amount)   
-	''' !clear 50 will clears a specified number of messages from the channel'''
-
-	@client.command()
-	async def clearall(self, ctx, amount=999):
-		await ctx.channel.purge(limit=amount)     
-	'''clears up to 999 msgs,
-	if you want more type a higher number after the command
-	ex: !clear all 999999
-	NOTE: this function cannot have alieses due to the fact that the command is looking for a input 
-	after clearall to specify the ammount to clear'''
-
-	@client.command()
 	async def kick(self, ctx, member : discord.Member, *, reason=None):
 		await member.kick(reason=reason)
+
+	@client.command()
+	async def random(self, ctx):
+		n = random.randint(1, 9999)
+		ctx.send(f'{n}')
 
 	#These are pretty self explanatory
 
@@ -79,6 +69,7 @@ class commands(commands.Cog):
 				await ctx.guild.unban(user)
 				await ctx.send(f'Unnbanned: {user.name}#{user.discriminator}')
 				return
+	
 
 def setup(client):
-	client.add_cog(commands(client))
+        client.add_cog(commands(client))
