@@ -220,8 +220,8 @@ async def change_status():
         await client.change_presence(activity=discord.Game(next(status)))
 
 @client.command()
-async def slowmode(ctx, amount: 5):
-    await ctx.channel.edit(slowmode_delay=amount)
+async def slowmode(ctx, seconds: int):
+    await ctx.channel.edit(slowmode_delay=seconds)
     await ctx.send(f"Set the slowmode delay in this channel to {seconds} seconds!")
 
 @slowmode.error
