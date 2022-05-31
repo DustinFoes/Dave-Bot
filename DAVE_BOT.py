@@ -73,7 +73,7 @@ async def on_guild_join(join):
 
 
 '''@client.event
-async def on_message_react'''
+async def on_message_react
 @client.event
   async def on_command_error(self, ctx, error):
        # if command has local error handler, return
@@ -133,7 +133,7 @@ async def on_message_react'''
         # ignore all other exception types, but print them to stderr
         print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
 
-        traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)
+        traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)'''
 
 @client.event
 async def on_guild_remove(guild):
@@ -163,10 +163,10 @@ async def on_command_error(ctx, error):
 #client commands
 
 @client.command(aliases=['purge', 'clean', 'delete'])
-@commands.check(server_owner)
-async def clear(ctx, amount : int):
-	await client.delete_messages(list_of_messages) 
-''' !clear 50 will clears a specified number of messages from the channel'''
+@commands.has_permissions(manage_messages=True)
+async def clear(ctx, amount=5):
+	await ctx.channel.purge(limit=amount)
+''' !clear X will clear a specified number of messages from the channel'''
 
 @clear.error
 async def clear_error(ctx, error):
@@ -227,9 +227,44 @@ async def slowmode(ctx, amount: 5):
 @slowmode.error
 async def slowmode_error(ctx, error):
 	await ctx.send('An Unknown Error Occurred')
-        
 
+
+
+
+        
+@client.command()
+async def kick(ctx, member : discord.Member, *, reason=None):
+	await member.kick(reason=reason)
+
+@kick.error
+async def kick_error(ctx, error):
+	await ctx.send('An Error Occurred')
+
+@client.command()
+async def ban(ctx, member : discord.Member, *, reason=None):
+	await member.ban(reason=reason)
+
+
+
+
+
+@client.command()
+async def unban(ctx, *, member):
+	banned_users = await ctx.guild.bans()
+	member_name, member_discriminator = member.split('#')
+
+	for ban_entry in banned_users:
+		user = ban_entry.user
+
+		if(user.name, user.discriminator) == (member_name, member_discriminator):
+			await ctx.guild.unban(user)
+			await ctx.send(f'Unnbanned: {user.name}#{user.discriminator}')
+			return
 	
+
+
+
+
 
 for filename in os.listdir('./cogs'):
 	if filename.endswith('.py'):
