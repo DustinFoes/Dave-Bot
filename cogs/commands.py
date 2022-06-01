@@ -1,5 +1,7 @@
 import discord, random
 from discord.ext import commands
+from discord_components import DiscordComponents, ComponentsBot, Button, SelectOption, Select
+
 
 client = commands.Bot(command_prefix = '!')
 
@@ -42,42 +44,30 @@ class commands(commands.Cog):
 		await ctx.send(f'Github Repositories: {repos}')
 
 
-	@client.command()
-	async def kick(self, ctx, member : discord.Member, *, reason=None):
-		await member.kick(reason=reason)
 
-	@kick.error
-	async def kick_error(ctx, error):
-		await ctx.send("Please enter a valid username: USER|#1234")
+
 
 	@client.command()
 	async def random(self, ctx):
 		n = random.randint(1, 9999)
 		ctx.send(f'{n}')
 
-	#These are pretty self explanatory
+	@client.command()
+	async def thumbpoll(self,ctx,*,message):
+		emb=discord.Embed(title='POLL ', description=f'{message}')
+		msg=await ctx.channel.send(embed=emb)
+		await msg.add_reaction('👍')
+		await msg.add_reaction('👎')
+
 
 	@client.command()
-	async def ban(self, ctx, member : discord.Member, *, reason=None):
-		await member.ban(reason=reason)
-
-
-	@ban.error
-	async def ban_error(ctx, error):
-		await ctx.send("Please enter a valid username: USER|#1234")
-
-	@client.command()
-	async def unban(self, ctx, *, member):
-		banned_users = await ctx.guild.bans()
-		member_name, member_discriminator = member.split('#')
-
-		for ban_entry in banned_users:
-			user = ban_entry.user
-
-			if(user.name, user.discriminator) == (member_name, member_discriminator):
-				await ctx.guild.unban(user)
-				await ctx.send(f'Unnbanned: {user.name}#{user.discriminator}')
-				return
+	async def facepoll(self,ctx,*,message):
+		emb=discord.Embed(title='------\nPOLL\n------', description=f'{message}')
+		msg=await ctx.channel.send(embed=emb)
+		await msg.add_reaction('😍')
+		await msg.add_reaction('😐')
+		await msg.add_reaction('😡')
+		await msg.add_reaction('😥')
 
 
 
