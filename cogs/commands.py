@@ -1,7 +1,5 @@
 import discord, random
 from discord.ext import commands
-from discord_components import DiscordComponents, ComponentsBot, Button, SelectOption, Select
-
 
 client = commands.Bot(command_prefix = '!')
 
@@ -19,6 +17,7 @@ class commands(commands.Cog):
 	#user defined commands !ping, !github, !ban user, etc
 	@client.command(aliases=['8 ball', '8ball', '8 Ball'])
 	async def _8ball(self, ctx, *, question):
+		await ctx.message.delete()
 		responses = ["As I see it, yes.", "Ask again later.", "Better not tell you now.",
 		 	"Cannot predict now.", "Concentrate and ask again.",
 	             	"Don’t count on it.", "It is certain.", "It is decidedly so.",
@@ -32,10 +31,12 @@ class commands(commands.Cog):
 
 	@client.command(aliases=['Git', 'Github', 'github', 'github link'])
 	async def git(self, ctx):
+		await ctx.message.delete()
 		await ctx.send(f'The Github link is: https://github.com/DustinFoes')
 	
 	@client.command()
 	async def gitrepos(self, ctx):
+		await ctx.message.delete()
 		repos = ['https://github.com/DustinFoes/DJANGOWEBSITE', 
 		'https://github.com/DustinFoes/PyGameSpaceShooter',
 		'https://github.com/DustinFoes/password-creator',
@@ -54,7 +55,8 @@ class commands(commands.Cog):
 
 	@client.command()
 	async def thumbpoll(self,ctx,*,message):
-		emb=discord.Embed(title='POLL ', description=f'{message}')
+		await ctx.message.delete()
+		emb=discord.Embed(title='~~~~~~~~~~~~~\nPOLLTIME!\n~~~~~~~~~~~~~', description=f'{message}')
 		msg=await ctx.channel.send(embed=emb)
 		await msg.add_reaction('👍')
 		await msg.add_reaction('👎')
@@ -62,7 +64,8 @@ class commands(commands.Cog):
 
 	@client.command()
 	async def facepoll(self,ctx,*,message):
-		emb=discord.Embed(title='------\nPOLL\n------', description=f'{message}')
+		await ctx.message.delete()
+		emb=discord.Embed(title='~~~~~~~~~~~~~\nPOLLTIME!\n~~~~~~~~~~~~~', description=f'{message}')
 		msg=await ctx.channel.send(embed=emb)
 		await msg.add_reaction('😍')
 		await msg.add_reaction('😐')
