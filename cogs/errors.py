@@ -16,7 +16,7 @@ class errors(commands.Cog):
 
 	@commands.Cog.listener()
 	async def on_message(self, message):
-		if "AssertionError" in message.content:
+		if "AssertionError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -26,7 +26,7 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "AttributeError" in message.content:
+		elif "AttributeError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -36,7 +36,7 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "EOFError" in message.content:
+		elif "EOFError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -46,7 +46,7 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "FloatingPointError" in message.content:
+		elif "FloatingPointError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -56,7 +56,7 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "GeneratorExit	" in message.content:
+		elif "GeneratorExit:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -66,7 +66,7 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "ImportError	" in message.content:
+		elif "ImportError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -76,17 +76,17 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "IndexError	" in message.content:
+		elif "IndexError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
 			em.add_field(
-				name="IndexError	!",
+				name="IndexError!",
 				value="Raised when the index of a sequence is out of range.",
 			)
 			await message.channel.send(embed=em)
 
-		elif "KeyError" in message.content:
+		elif "KeyError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -96,7 +96,7 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "KeyboardInterrupt" in message.content:
+		elif "KeyboardInterrupt:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -106,7 +106,7 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "MemoryError" in message.content:
+		elif "MemoryError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -116,17 +116,17 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "NameError	" in message.content:
+		elif "NameError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
 			em.add_field(
-				name="NameError	!",
+				name="NameError!",
 				value="Raised when a variable is not found in the local or global scope.",
 			)
 			await message.channel.send(embed=em)
 
-		elif "NotImplementedError" in message.content:
+		elif "NotImplementedError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -136,7 +136,7 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "OSError" in message.content:
+		elif "OSError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -146,7 +146,7 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "OverflowError" in message.content:
+		elif "OverflowError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -156,7 +156,7 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "ReferenceError" in message.content:
+		elif "ReferenceError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -166,7 +166,7 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "RuntimeError" in message.content:
+		elif "RuntimeError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -176,7 +176,7 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "StopIteration	" in message.content:
+		elif "StopIteration:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -186,7 +186,7 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "SyntaxError	" in message.content:
+		elif "SyntaxError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -196,7 +196,7 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "IndentationError" in message.content:
+		elif "IndentationError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -206,7 +206,7 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "TabError" in message.content:
+		elif "TabError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -216,7 +216,7 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "SystemError" in message.content:
+		elif "SystemError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -226,7 +226,7 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "SystemExit" in message.content:
+		elif "SystemExit:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -236,7 +236,7 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "TypeError" in message.content:
+		elif "TypeError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -246,7 +246,7 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "UnboundLocalError" in message.content:
+		elif "UnboundLocalError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -256,7 +256,7 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "UnicodeError" in message.content:
+		elif "UnicodeError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -266,7 +266,7 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "UnicodeEncodeError" in message.content:
+		elif "UnicodeEncodeError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -276,7 +276,7 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "UnicodeDecodeError" in message.content:
+		elif "UnicodeDecodeError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -286,7 +286,7 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "UnicodeTranslateError" in message.content:
+		elif "UnicodeTranslateError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -296,7 +296,7 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "ValueError" in message.content:
+		elif "ValueError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
@@ -306,7 +306,7 @@ class errors(commands.Cog):
 			)
 			await message.channel.send(embed=em)
 
-		elif "ZeroDivisionError" in message.content:
+		elif "ZeroDivisionError:" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", description="", color=0x22FC00
 			)
