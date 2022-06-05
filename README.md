@@ -15,3 +15,6 @@ Commands How To Use & Descriptions:
 |!kick <@user> | Kicks a user from the discord
 |!unban <user#1234> | Unbans a user from the discord (note do not use the @ to find the user when unbanning, it will not work)
 |--------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+  
+  Please note this is purely a project for my own learning perposes. None of this is meant to perform any original service to someone.
