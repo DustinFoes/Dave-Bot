@@ -8,11 +8,9 @@ from discord.ext.commands import has_permissions, MissingPermissions
 import asyncio
 
 
-'''def get_prefix(client, message):
-    with open('prefixes.json', 'r') as f:
-        prefixes = json.load(f)
-
-    return prefixes[str(message.guild.id)]'''
+TOKEN = YOUR TOKEN HERE
+Server_Owner = Your profile ID
+TICKETCHANNEL = Channel ID Here
 
 
 
@@ -52,7 +50,7 @@ status = cycle(['Valorant', 'Your Mom'])
 client.remove_command("help")
 
 def server_owner(ctx):
-    return ctx.author.id == InputUserIDHere # <--- This sets a master user to have access to specific functions.
+    return ctx.author.id == Server_Owner # <--- This sets a master user to have access to specific functions.
 
 
 #client events
@@ -243,7 +241,7 @@ async def slowmode_error(ctx, error):
 
 @tasks.loop(minutes=5.0)
 async def send_message():
-    channel = client.get_channel(InputChannelIDHere)
+    channel = client.get_channel(TICKETCHANNEL)
     await channel.send("Use !new to create a new ticket!\nUse !close to close the ticket")
 
         
