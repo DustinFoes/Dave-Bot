@@ -52,7 +52,7 @@ status = cycle(['Valorant', 'Your Mom'])
 client.remove_command("help")
 
 def server_owner(ctx):
-    return ctx.author.id == 221840898634285056 # <--- This sets a master user to have access to specific functions.
+    return ctx.author.id == InputUserIDHere # <--- This sets a master user to have access to specific functions.
 
 
 #client events
@@ -243,7 +243,7 @@ async def slowmode_error(ctx, error):
 
 @tasks.loop(minutes=5.0)
 async def send_message():
-    channel = client.get_channel(978762893954805830)
+    channel = client.get_channel(InputChannelIDHere)
     await channel.send("Use !new to create a new ticket!\nUse !close to close the ticket")
 
         
@@ -698,4 +698,4 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
-client.run('OTc0NzEwNTc3ODMyMjg0MTcw.GTKKWM.v5SiXjCVzQOwr3Z5A2oSyJ138OTwEy7DIxdh1g')
+client.run('TOKEN')
