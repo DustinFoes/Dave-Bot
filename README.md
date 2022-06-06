@@ -16,7 +16,7 @@ I started this as my first ever discord bot. As I started learning more and more
 
 
 
-###Configuration
+### Configuration
 - open the  `config.json` file
 - Input The Following 
     - TOKEN
