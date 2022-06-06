@@ -8,10 +8,22 @@ from discord.ext.commands import has_permissions, MissingPermissions
 import asyncio
 
 
-TOKEN = YOUR TOKEN HERE
-Server_Owner = Your profile ID
-TICKETCHANNEL = Channel ID Here
 
+
+
+if os.path.exists(os.getcwd() + '/config.json'):
+	with open('./config.json') as f:
+		configData = json.load(f)
+else:
+	configTemplate = {'TOKEN': '', 'OWNER_ID': ''}
+
+	with open(os.getcwd() + '/config.json', 'w+') as f:
+		json.dump(configTemplate, f)
+
+
+TOKEN = configData['TOKEN']
+OWNER_ID = configData['OWNER_ID']
+TICKET_CHANNEL = configData['TICKET_CHANNEL']
 
 
 class CustomHelpCommand(commands.HelpCommand):
@@ -50,7 +62,7 @@ status = cycle(['Valorant', 'Your Mom'])
 client.remove_command("help")
 
 def server_owner(ctx):
-    return ctx.author.id == Server_Owner # <--- This sets a master user to have access to specific functions.
+    return ctx.author.id == OWNER_ID # <--- This sets a master user to have access to specific functions.
 
 
 #client events
@@ -73,72 +85,6 @@ async def on_guild_join(join):
 
     with open('prefixes.json', 'w') as f:
         json.dump(prefixes, f)
-
-
-
-'''@client.event
-async def on_message_react
-@client.event
-  async def on_command_error(self, ctx, error):
-       # if command has local error handler, return
-       if hasattr(ctx.command, 'on_error'):
-            return
-
-        # get the original exception
-        error = getattr(error, 'original', error)
-
-        if isinstance(error, commands.CommandNotFound):
-            return
-
-        if isinstance(error, commands.BotMissingPermissions):
-            missing = [perm.replace('_', ' ').replace('guild', 'server').title() for perm in error.missing_perms]
-            if len(missing) > 2:
-                fmt = '{}, and {}'.format("**, **".join(missing[:-1]), missing[-1])
-            else:
-                fmt = ' and '.join(missing)
-            _message = 'I need the **{}** permission(s) to run this command.'.format(fmt)
-            await ctx.send(_message)
-            return
-
-        if isinstance(error, commands.DisabledCommand):
-            await ctx.send('This command has been disabled.')
-            return
-
-        if isinstance(error, commands.CommandOnCooldown):
-            await ctx.send("This command is on cooldown, please retry in {}s.".format(math.ceil(error.retry_after)))
-            return
-
-        if isinstance(error, commands.MissingPermissions):
-            missing = [perm.replace('_', ' ').replace('guild', 'server').title() for perm in error.missing_perms]
-            if len(missing) > 2:
-                fmt = '{}, and {}'.format("**, **".join(missing[:-1]), missing[-1])
-            else:
-                fmt = ' and '.join(missing)
-            _message = 'You need the **{}** permission(s) to use this command.'.format(fmt)
-            await ctx.send(_message)
-            return
-
-        if isinstance(error, commands.UserInputError):
-            await ctx.send("Invalid input.")
-            await self.send_command_help(ctx)
-            return
-
-        if isinstance(error, commands.NoPrivateMessage):
-            try:
-                await ctx.author.send('This command cannot be used in direct messages.')
-            except discord.Forbidden:
-                pass
-            return
-
-        if isinstance(error, commands.CheckFailure):
-            await ctx.send("You do not have permission to use this command.")
-            return
-
-        # ignore all other exception types, but print them to stderr
-        print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
-
-        traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)'''
-
 
 
 @client.event
@@ -241,7 +187,7 @@ async def slowmode_error(ctx, error):
 
 @tasks.loop(minutes=5.0)
 async def send_message():
-    channel = client.get_channel(TICKETCHANNEL)
+    channel = client.get_channel(TICKET_CHANNEL)
     await channel.send("Use !new to create a new ticket!\nUse !close to close the ticket")
 
         
@@ -346,8 +292,7 @@ async def new(ctx, *, args = None):
 
     ticket_number = int(data["ticket-counter"])
     ticket_number += 1
-
-    ticket_channel = await ctx.guild.create_text_channel("ticket-{}".format(ticket_number))
+    ticket_channel = await ctx.guild.create_text_channel("ticket-{}".format(ticket_number), category=TICKETS)
     await ticket_channel.set_permissions(ctx.guild.get_role(ctx.guild.id), send_messages=False, read_messages=False)
 
     for role_id in data["valid-roles"]:
@@ -696,4 +641,4 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
-client.run('TOKEN')
+client.run(TOKEN)
