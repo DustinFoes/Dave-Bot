@@ -1,3 +1,4 @@
+from unicodedata import category
 import discord, random, os #imports the discord.py 
 from discord.ext import commands, tasks #allows us to create commands in discord
 from itertools import cycle
@@ -229,7 +230,7 @@ async def unban(ctx, *, member):
 
 
 @client.command()
-@commands.check(server_owner)
+@has_permissions(administrator=True)
 async def adminhelp(ctx):
     await ctx.message.delete()
     with open("data.json") as f:
