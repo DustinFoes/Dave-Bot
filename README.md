@@ -11,7 +11,7 @@ I started this as my first ever discord bot. As I started learning more and more
 ### Installing
 - You can download from: https://github.com/DustinFoes/Dave-Bot/archive/refs/heads/master.zip
 - Make sure to replace the bot Token and channel / user IDs with your own where necessary.
-[TURORIAL](https://youtu.be/b0G2FfZy-Y4)
+### [TURORIAL](https://youtu.be/b0G2FfZy-Y4)
 [![Thumb](https://user-images.githubusercontent.com/105510092/172236970-03583d1e-21ee-457f-ad2f-caf867e60a29.PNG)](https://youtu.be/b0G2FfZy-Y4)
 
 
