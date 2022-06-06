@@ -1,3 +1,4 @@
+from telnetlib import STATUS
 import discord, random, os #imports the discord.py 
 from discord.ext import commands, tasks #allows us to create commands in discord
 from itertools import cycle
@@ -15,7 +16,7 @@ if os.path.exists(os.getcwd() + '/config.json'):
 	with open('./config.json') as f:
 		configData = json.load(f)
 else:
-	configTemplate = {'TOKEN': '', 'OWNER_ID': ''}
+	configTemplate = {'TOKEN': '', 'OWNER_ID': '', 'CATEGORY:' ''}
 
 	with open(os.getcwd() + '/config.json', 'w+') as f:
 		json.dump(configTemplate, f)
@@ -25,6 +26,8 @@ TOKEN = configData['TOKEN']
 OWNER_ID = configData['OWNER_ID']
 TICKET_CHANNEL = configData['TICKET_CHANNEL']
 CATEGORY = configData['CATEGORY']
+
+
 
 
 class CustomHelpCommand(commands.HelpCommand):
@@ -56,8 +59,7 @@ class CustomHelpCommand(commands.HelpCommand):
 
 prefix = '!'
 client = commands.Bot(command_prefix = prefix, HelpCommand=CustomHelpCommand())
-
-status = cycle(['Valorant', 'Your Mom'])
+status = cycle(['ping:', 'your mom'])
 
 
 client.remove_command("help")
@@ -72,7 +74,7 @@ def server_owner(ctx):
 async def on_ready(): #when the bot is in ready mode/state, then do this:
     print('DAVE is Online')
     change_status.start()
-    send_message.start()
+    '''send_message.start()'''
 
 
 
@@ -186,10 +188,10 @@ async def slowmode_error(ctx, error):
     await ctx.send('An Unknown Error Occurred')
 
 
-@tasks.loop(minutes=5.0)
+'''@tasks.loop(minutes=5.0)
 async def send_message():
     channel = client.get_channel(TICKET_CHANNEL)
-    await channel.send("Use !new to create a new ticket!\nUse !close to close the ticket")
+    await channel.send("Use !new to create a new ticket!\nUse !close to close the ticket")'''
 
         
 @client.command()

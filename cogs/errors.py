@@ -1,7 +1,6 @@
 import discord
 from discord.ext import commands, tasks
-from discord.ext.commands import has_permissions, MissingPermissions
-import asyncio
+
 
 
 
@@ -28,7 +27,7 @@ class errors(commands.Cog):
 
 		elif "AttributeError:" in message.content:
 			em = discord.Embed(
-				title="Coding Error Detection", description="", color=0x22FC00
+				title="Coding Error Detection", description="", color=0xdb1f1f
 			)
 			em.add_field(
 				name="AttributeError!",
