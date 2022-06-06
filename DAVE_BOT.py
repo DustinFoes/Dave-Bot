@@ -16,7 +16,7 @@ if os.path.exists(os.getcwd() + '/config.json'):
 	with open('./config.json') as f:
 		configData = json.load(f)
 else:
-	configTemplate = {'TOKEN': '', 'OWNER_ID': '', 'CATEGORY:' ''}
+	configTemplate = {'TOKEN': '', 'OWNER_ID': '', 'CATEGORY': ''}
 
 	with open(os.getcwd() + '/config.json', 'w+') as f:
 		json.dump(configTemplate, f)
