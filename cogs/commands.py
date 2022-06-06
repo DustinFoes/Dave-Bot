@@ -28,7 +28,6 @@ class commands(commands.Cog):
 
 		await ctx.send(f'Question: [question]\nAnswer: {random.choice(responses)}')
 
-
 	@client.command(aliases=['Git', 'Github', 'github', 'github link'])
 	async def git(self, ctx):
 		await ctx.message.delete()
@@ -76,4 +75,4 @@ class commands(commands.Cog):
 
 
 def setup(client):
-        client.add_cog(commands(client))
+	client.add_cog(commands(client))
