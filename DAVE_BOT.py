@@ -1,4 +1,3 @@
-from telnetlib import STATUS
 import discord, random, os #imports the discord.py 
 from discord.ext import commands, tasks #allows us to create commands in discord
 from itertools import cycle
@@ -16,7 +15,7 @@ if os.path.exists(os.getcwd() + '/config.json'):
 	with open('./config.json') as f:
 		configData = json.load(f)
 else:
-	configTemplate = {'TOKEN': '', 'OWNER_ID': '', 'CATEGORY': '', 'TICKET_CHANNEL': ''}
+	configTemplate = {'TOKEN': '', 'OWNER_ID': ''}
 
 	with open(os.getcwd() + '/config.json', 'w+') as f:
 		json.dump(configTemplate, f)
@@ -28,27 +27,25 @@ TICKET_CHANNEL = configData['TICKET_CHANNEL']
 CATEGORY = configData['CATEGORY']
 
 
-
-
 class CustomHelpCommand(commands.HelpCommand):
 
-    def __init__(self):
-        super().__init__()
+	def __init__(self):
+		super().__init__()
 
-    async def send_bot_help(self, mapping):
-        for cog in mapping:
-            await self.get_destination().send(f'{cog.qualified_name}: {[command.name for command in mapping[cog]]}')
-
-
-    async def send_cog_help(self, cog):
-        await self.get_destination().send(f'{cog.qualified_name}: {[command.name for command in cog.get_commands()]}')
-
-    async def send_group_help(self, group):
-        await self.get_destination().send(f'{group.name}: {[command.name for index, command in enumerate(group.commands)]}')
+	async def send_bot_help(self, mapping):
+		for cog in mapping:
+			await self.get_destination().send(f'{cog.qualified_name}: {[command.name for command in mapping[cog]]}')
 
 
-    async def send_command_help(self, command):
-        await self.get_destination().send(command.name)
+	async def send_cog_help(self, cog):
+		await self.get_destination().send(f'{cog.qualified_name}: {[command.name for command in cog.get_commands()]}')
+
+	async def send_group_help(self, group):
+		await self.get_destination().send(f'{group.name}: {[command.name for index, command in enumerate(group.commands)]}')
+
+
+	async def send_command_help(self, command):
+		await self.get_destination().send(command.name)
 
 
 
@@ -59,7 +56,7 @@ class CustomHelpCommand(commands.HelpCommand):
 
 prefix = '!'
 client = commands.Bot(command_prefix = prefix, HelpCommand=CustomHelpCommand())
-status = cycle(['ping:', 'your mom'])
+status = cycle(['Valorant', 'Your Mom'])
 
 
 client.remove_command("help")
@@ -74,7 +71,7 @@ def server_owner(ctx):
 async def on_ready(): #when the bot is in ready mode/state, then do this:
     print('DAVE is Online')
     change_status.start()
-    '''send_message.start()'''
+    send_message.start()
 
 
 
@@ -188,10 +185,10 @@ async def slowmode_error(ctx, error):
     await ctx.send('An Unknown Error Occurred')
 
 
-'''@tasks.loop(minutes=5.0)
+@tasks.loop(minutes=5.0)
 async def send_message():
     channel = client.get_channel(TICKET_CHANNEL)
-    await channel.send("Use !new to create a new ticket!\nUse !close to close the ticket")'''
+    await channel.send("Use !new to create a new ticket!\nUse !close to close the ticket")
 
         
 @client.command()
@@ -275,6 +272,7 @@ async def help(ctx):
         em.add_field(name="`!gitrepos`", value="This command will display the repos in my git")
         em.add_field(name="`!random`", value="This command will give a random 4 digit number")
         em.add_field(name="`!help`", value="This command will display this menu")
+        em.add_field(name="`!adminhelp`", value="This command will display th menu")
         em.set_footer(text="Dave Bot")
 
         await ctx.send(embed=em)
@@ -638,6 +636,17 @@ async def deladminrole(ctx, role_id=None):
         await ctx.send(embed=em)
 
 
+'''@client.command()
+async def setttchannel(ctx, category):
+
+
+
+    try:
+        with open('config.json') as f:
+            data = json.load(f)
+
+
+            channel = client.get_channel(TICKET_CHANNEL)'''
 
 
 
