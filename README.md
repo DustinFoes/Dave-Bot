@@ -44,3 +44,4 @@ Discord: https://discord.gg/mBmX292QnG
 - 0.1
   - PreRelease
 
+[![Thumb](https://user-images.githubusercontent.com/105510092/172236970-03583d1e-21ee-457f-ad2f-caf867e60a29.PNG)](https://youtu.be/b0G2FfZy-Y4)
