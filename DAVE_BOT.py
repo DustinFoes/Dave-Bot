@@ -24,6 +24,7 @@ else:
 TOKEN = configData['TOKEN']
 OWNER_ID = configData['OWNER_ID']
 TICKET_CHANNEL = configData['TICKET_CHANNEL']
+CATEGORY = configData['CATEGORY']
 
 
 class CustomHelpCommand(commands.HelpCommand):
@@ -280,7 +281,6 @@ async def help(ctx):
 async def new(ctx, *, args = None):
     await ctx.message.delete()
     await client.wait_until_ready()
-
     if args == None:
         message_content = "Please give a brief description of your issue and we will be with you shortly:"
     
@@ -290,9 +290,10 @@ async def new(ctx, *, args = None):
     with open("data.json") as f:
         data = json.load(f)
 
+    c = discord.utils.get(ctx.guild.categories, id=CATEGORY)
     ticket_number = int(data["ticket-counter"])
     ticket_number += 1
-    ticket_channel = await ctx.guild.create_text_channel("ticket-{}".format(ticket_number), category=TICKETS)
+    ticket_channel = await ctx.guild.create_text_channel("ticket-{}".format(ticket_number), category=c)
     await ticket_channel.set_permissions(ctx.guild.get_role(ctx.guild.id), send_messages=False, read_messages=False)
 
     for role_id in data["valid-roles"]:
@@ -368,6 +369,7 @@ async def close(ctx):
         except asyncio.TimeoutError:
             em = discord.Embed(title="Auroris Tickets", description="You have run out of time to close this ticket. Please run the command again.", color=0x00a8ff)
             await ctx.send(embed=em)
+
 
         
 
