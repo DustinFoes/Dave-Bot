@@ -11,6 +11,15 @@ I started this as my first ever discord bot. As I started learning more and more
 ### Installing
 - You can download from: https://github.com/DustinFoes/Dave-Bot/archive/refs/heads/master.zip
 - Make sure to replace the bot Token and channel / user IDs with your own where necessary.
+
+###Configuration
+- open the  `config.json` file
+- Input The Following 
+    - TOKEN
+    - Discord user ID
+    - TICKET CHANNEL ID
+- Save File & Close
+
 ### Executing program
 - How to run the program
 - run the following in your python IDLE or on a remote server
