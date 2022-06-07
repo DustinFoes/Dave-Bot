@@ -119,6 +119,9 @@ async def on_command_error(ctx, error):
 @commands.has_permissions(manage_messages=True)
 async def clear(ctx, amount=5):
     await ctx.channel.purge(limit=amount)
+    Embed = discord.Embed(title = '✅ Success!', 
+        description=f'{ctx.author.mention} cleared {amount} messages!', color = 0x00ff00)
+    await ctx.reply(embed=Embed)
 ''' !clear X will clear a specified number of messages from the channel'''
 
 @clear.error
@@ -130,6 +133,8 @@ async def clear_error(ctx, error):
 @commands.has_permissions(manage_messages=True)
 async def clearall(ctx, amount=999):
     await ctx.channel.purge(limit=amount)
+    Embed = discord.Embed(title = '✅ Success!', description=f'{ctx.author.mention} 💣Nuked the Channel', color = 0x00ff00)
+    await ctx.message.channel.send(embed=Embed)
     
 '''clears up to 999 msgs,
 if you want more type a higher number after the command
@@ -232,7 +237,6 @@ async def unban(ctx, *, member):
 @client.command()
 @has_permissions(administrator=True)
 async def adminhelp(ctx):
-    await ctx.message.delete()
     with open("data.json") as f:
         data = json.load(f)
 
@@ -252,20 +256,20 @@ async def adminhelp(ctx):
         em.add_field(name="`!unload <cogname>`", value="This command will unload the given cog.")
         em.add_field(name="`!reload <cogname>`", value="This command will reload the given cog.")
         em.add_field(name="`!slowmode <seconds>`", value="This command will enable slowmode for x amount of seconds.")
-        em.add_field(name="`!help`", value="This command will display this menu")
+        em.add_field(name="`!help`", value="This command will display the normal help menu")
+        em.add_field(name="`!adminhelp`", value="This command will display this menu")
         em.set_footer(text="Dave Bot")
 
-        await ctx.send(embed=em)
+        await ctx.reply(embed=em)
 
 
 @client.command()
 async def help(ctx):
-    await ctx.message.delete()
     with open("data.json") as f:
         data = json.load(f)
 
 
-        em = discord.Embed(title = "Puzzles's Tickets Help", description ="", color = 0x22fc00)
+        em = discord.Embed(title="Dave Bot Admin Help", description="", color=0x22fc00)
         em.add_field(name="`!new <message>`", value="This creates a new ticket. Add any words after the command if you'd like to send a message when we initially create your ticket.")
         em.add_field(name="`!close`", value="Use this to close a ticket. This command only works in ticket channels.")
         em.add_field(name="`!8ball <question>`", value="Ask the 8 ball a question.")
@@ -276,7 +280,7 @@ async def help(ctx):
         em.add_field(name="`!adminhelp`", value="This command will display th menu")
         em.set_footer(text="Dave Bot")
 
-        await ctx.send(embed=em)
+        await ctx.reply(embed=em)
 
 @client.command()
 async def new(ctx, *, args = None):
