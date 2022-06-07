@@ -4,6 +4,7 @@ from discord.ext import commands, tasks #allows us to create commands in discord
 from itertools import cycle
 import json
 import traceback
+import logging
 import datetime
 from discord.ext.commands import has_permissions, MissingPermissions
 import asyncio
@@ -26,6 +27,12 @@ TOKEN = configData['TOKEN']
 OWNER_ID = configData['OWNER_ID']
 TICKET_CHANNEL = configData['TICKET_CHANNEL']
 CATEGORY = configData['CATEGORY']
+
+logger = logging.getLogger('discord')
+logger.setLevel(logging.DEBUG)
+handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
+handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
+logger.addHandler(handler)
 
 
 class CustomHelpCommand(commands.HelpCommand):
