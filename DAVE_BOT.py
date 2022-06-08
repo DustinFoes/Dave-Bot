@@ -651,7 +651,6 @@ async def deladminrole(ctx, role_id=None):
 
 
 
-
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
