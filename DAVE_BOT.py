@@ -650,18 +650,6 @@ async def deladminrole(ctx, role_id=None):
         await ctx.send(embed=em)
 
 
-'''@client.command()
-async def setttchannel(ctx, category):
-
-
-
-    try:
-        with open('config.json') as f:
-            data = json.load(f)
-
-
-            channel = client.get_channel(TICKET_CHANNEL)'''
-
 
 
 for filename in os.listdir('./cogs'):
