@@ -7,6 +7,7 @@ import traceback
 import logging
 import datetime
 from discord.ext.commands import has_permissions, MissingPermissions
+from discord_slash import SlashCommand
 import asyncio
 
 
@@ -65,6 +66,7 @@ class CustomHelpCommand(commands.HelpCommand):
 prefix = '!'
 client = commands.Bot(command_prefix = prefix, HelpCommand=CustomHelpCommand())
 status = cycle(['Valorant', 'Your Mom'])
+slash = SlashCommand(client, sync_commands=True)
 
 
 client.remove_command("help")
@@ -122,7 +124,7 @@ async def on_command_error(ctx, error):
 
 #client commands
 
-@client.command(aliases=['purge', 'clean', 'delete'])
+@slash.slash(description='clears x amount of messages from chat')
 @commands.has_permissions(manage_messages=True)
 async def clear(ctx, amount=5):
     await ctx.channel.purge(limit=amount)
@@ -133,15 +135,17 @@ async def clear(ctx, amount=5):
 
 @clear.error
 async def clear_error(ctx, error):
-    await ctx.send("That Didn't Work")
+    Embed = discord.Embed(title = '❌ Failed!', 
+        description=f'Failed To Clear Messages', color = 0x00ff00)
+    await ctx.reply(embed=Embed)
 
 
-@client.command(aliases=['purge_all', 'clean_all', 'delete_all'])
+@slash.slash(description='clears / Nukes Chat')
 @commands.has_permissions(manage_messages=True)
 async def clearall(ctx, amount=999):
     await ctx.channel.purge(limit=amount)
     Embed = discord.Embed(title = '✅ Success!', description=f'{ctx.author.mention} 💣Nuked the Channel', color = 0x00ff00)
-    await ctx.message.channel.send(embed=Embed)
+    await ctx.reply(embed=Embed)
     
 '''clears up to 999 msgs,
 if you want more type a higher number after the command
@@ -149,25 +153,23 @@ ex: !clear all 999999
 NOTE: this function cannot have aliases due to the fact that the command is looking for a input 
 after clearall to specify the amount to clear'''
 
-@clearall.error
-async def clearall_error(ctx, error):
-    await ctx.send('That Didnt Work')
 
-@client.command()
+
+@slash.slash(description='Loads a specifiec cog')
 @commands.check(server_owner)
 async def load(ctx, extension): #extension = the cog you want to load
     await ctx.message.delete()
     client.load_extension(f'cogs.{extension}')
     await ctx.send(f'Cog has been loaded')
 
-@client.command()
+@slash.slash(description='Unloads a specifiec cog')
 @commands.check(server_owner)
 async def unload(ctx, extension): #extension = the cog you want to load
     await ctx.message.delete()
     client.unload_extension(f'cogs.{extension}')
     await ctx.send(f'Cog has been unloaded')    
 
-@client.command()
+@slash.slash(description='Reloads a specific cog')
 @commands.check(server_owner)
 async def reload(ctx, extension):
     #await ctx.message.delete()
@@ -180,7 +182,7 @@ async def check_error(ctx, error):
     await ctx.message.delete()
     await ctx.send('Reload Failed')
 
-@client.command()
+@slash.slash(description='Returns the bots ping')
 async def ping(ctx):
     await ctx.send(f'Pong! I took {round(client.latency * 1000)}ms to respond.')
 
@@ -188,7 +190,7 @@ async def ping(ctx):
 async def change_status():
         await client.change_presence(activity=discord.Game(next(status)))
 
-@client.command()
+@slash.slash(description='Sets slowmode')
 async def slowmode(ctx, seconds: int):
     await ctx.channel.edit(slowmode_delay=seconds)
     await ctx.send(f"Set the slowmode delay in this channel to {seconds} seconds!")
@@ -204,7 +206,7 @@ async def send_message():
     await channel.send("Use !new to create a new ticket!\nUse !close to close the ticket")
 
         
-@client.command()
+@slash.slash(description='Kicks a user from the guild')
 async def kick(ctx, member : discord.Member, *, reason=None):
     await ctx.message.delete()
     await member.kick(reason=reason)
@@ -214,7 +216,7 @@ async def kick_error(ctx, error):
     await ctx.message.delete()
     await ctx.send('An Error Occurred')
 
-@client.command()
+@slash.slash(description='Bans a user from the guild')
 async def ban(ctx, member : discord.Member, *, reason=None):
     await ctx.message.delete()
     await member.ban(reason=reason)
@@ -223,7 +225,7 @@ async def ban(ctx, member : discord.Member, *, reason=None):
 
 
 
-@client.command()
+@slash.slash(description='Unbans a user from the guild')
 async def unban(ctx, *, member):
     await ctx.message.delete()
     banned_users = await ctx.guild.bans()
@@ -241,7 +243,7 @@ async def unban(ctx, *, member):
     
 
 
-@client.command()
+@slash.slash(description='Displays the Admin Help Menu')
 @has_permissions(administrator=True)
 async def adminhelp(ctx):
     with open("data.json") as f:
@@ -270,7 +272,7 @@ async def adminhelp(ctx):
         await ctx.reply(embed=em)
 
 
-@client.command()
+@slash.slash(description='Shows the basic help menu')
 async def help(ctx):
     with open("data.json") as f:
         data = json.load(f)
@@ -289,7 +291,7 @@ async def help(ctx):
 
         await ctx.reply(embed=em)
 
-@client.command()
+@slash.slash(description='creates a new help ticket')
 async def new(ctx, *, args = None):
     await ctx.message.delete()
     await client.wait_until_ready()
@@ -351,7 +353,7 @@ async def new(ctx, *, args = None):
     
     await ctx.send(embed=created_em)
 
-@client.command()
+@slash.slash(description='Closes a ticket')
 async def close(ctx):
     await ctx.message.delete()
     with open('data.json') as f:
@@ -366,7 +368,7 @@ async def close(ctx):
 
         try:
 
-            em = discord.Embed(title="Puzzle's Tickets", description="Are you sure you want to close this ticket? Reply with `close` if you are sure.", color=0x00a8ff)
+            em = discord.Embed(title="Dave Bot's Tickets", description="Are you sure you want to close this ticket? Reply with `close` to confirm", color=0x00a8ff)
         
             await ctx.send(embed=em)
             await client.wait_for('message', check=check, timeout=60)
@@ -379,13 +381,13 @@ async def close(ctx):
                 json.dump(data, f)
         
         except asyncio.TimeoutError:
-            em = discord.Embed(title="Auroris Tickets", description="You have run out of time to close this ticket. Please run the command again.", color=0x00a8ff)
+            em = discord.Embed(title="Dave Bot's Tickets", description="You have run out of time to close this ticket. Please run the command again.", color=0x00a8ff)
             await ctx.send(embed=em)
 
 
         
 
-@client.command()
+@slash.slash(description='Gives a user acces to /new')
 async def addaccess(ctx, role_id=None):
     await ctx.message.delete()
 
@@ -417,23 +419,23 @@ async def addaccess(ctx, role_id=None):
                 with open('data.json', 'w') as f:
                     json.dump(data, f)
                 
-                em = discord.Embed(title="Auroris Tickets", description="You have successfully added `{}` to the list of roles with access to tickets.".format(role.name), color=0x00a8ff)
+                em = discord.Embed(title="Dave Bot", description="You have successfully added `{}` to the list of roles with access to tickets.".format(role.name), color=0x00a8ff)
 
                 await ctx.send(embed=em)
 
             except:
-                em = discord.Embed(title="Auroris Tickets", description="That isn't a valid role ID. Please try again with a valid role ID.")
+                em = discord.Embed(title="Dave Bot", description="That isn't a valid role ID. Please try again with a valid role ID.")
                 await ctx.send(embed=em)
         
         else:
-            em = discord.Embed(title="Auroris Tickets", description="That role already has access to tickets!", color=0x00a8ff)
+            em = discord.Embed(title="Dave Bot", description="That role already has access to tickets!", color=0x00a8ff)
             await ctx.send(embed=em)
     
     else:
-        em = discord.Embed(title="Auroris Tickets", description="Sorry, you don't have permission to run that command.", color=0x00a8ff)
+        em = discord.Embed(title="Dave Bot", description="Sorry, you don't have permission to run that command.", color=0x00a8ff)
         await ctx.send(embed=em)
 
-@client.command()
+@slash.slash(description='Removes a users access to use /new')
 async def delaccess(ctx, role_id=None):
     await ctx.message.delete()
     with open('data.json') as f:
@@ -469,24 +471,24 @@ async def delaccess(ctx, role_id=None):
                 with open('data.json', 'w') as f:
                     json.dump(data, f)
 
-                em = discord.Embed(title="Auroris Tickets", description="You have successfully removed `{}` from the list of roles with access to tickets.".format(role.name), color=0x00a8ff)
+                em = discord.Embed(title="Dave Bot", description="You have successfully removed `{}` from the list of roles with access to tickets.".format(role.name), color=0x00a8ff)
 
                 await ctx.send(embed=em)
             
             else:
                 
-                em = discord.Embed(title="Auroris Tickets", description="That role already doesn't have access to tickets!", color=0x00a8ff)
+                em = discord.Embed(title="Dave Bot", description="That role already doesn't have access to tickets!", color=0x00a8ff)
                 await ctx.send(embed=em)
 
         except:
-            em = discord.Embed(title="Auroris Tickets", description="That isn't a valid role ID. Please try again with a valid role ID.")
+            em = discord.Embed(title="Dave Bot", description="That isn't a valid role ID. Please try again with a valid role ID.")
             await ctx.send(embed=em)
     
     else:
-        em = discord.Embed(title="Auroris Tickets", description="Sorry, you don't have permission to run that command.", color=0x00a8ff)
+        em = discord.Embed(title="Dave Bot", description="Sorry, you don't have permission to run that command.", color=0x00a8ff)
         await ctx.send(embed=em)
 
-@client.command()
+@slash.slash(description='Adds a role to ping when a ticket is created')
 async def addpingedrole(ctx, role_id=None):
     await ctx.message.delete()
 
@@ -519,23 +521,23 @@ async def addpingedrole(ctx, role_id=None):
                 with open('data.json', 'w') as f:
                     json.dump(data, f)
 
-                em = discord.Embed(title="Auroris Tickets", description="You have successfully added `{}` to the list of roles that get pinged when new tickets are created!".format(role.name), color=0x00a8ff)
+                em = discord.Embed(title="Dave Bot", description="You have successfully added `{}` to the list of roles that get pinged when new tickets are created!".format(role.name), color=0x00a8ff)
 
                 await ctx.send(embed=em)
 
             except:
-                em = discord.Embed(title="Auroris Tickets", description="That isn't a valid role ID. Please try again with a valid role ID.")
+                em = discord.Embed(title="Dave Bot", description="That isn't a valid role ID. Please try again with a valid role ID.")
                 await ctx.send(embed=em)
             
         else:
-            em = discord.Embed(title="Auroris Tickets", description="That role already receives pings when tickets are created.", color=0x00a8ff)
+            em = discord.Embed(title="Dave Bot", description="That role already receives pings when tickets are created.", color=0x00a8ff)
             await ctx.send(embed=em)
     
     else:
-        em = discord.Embed(title="Auroris Tickets", description="Sorry, you don't have permission to run that command.", color=0x00a8ff)
+        em = discord.Embed(title="Dave Bot", description="Sorry, you don't have permission to run that command.", color=0x00a8ff)
         await ctx.send(embed=em)
 
-@client.command()
+@slash.slash(description='Deletes a role from being pinged when /new is used')
 async def delpingedrole(ctx, role_id=None):
     await ctx.message.delete()
 
@@ -572,23 +574,23 @@ async def delpingedrole(ctx, role_id=None):
                 with open('data.json', 'w') as f:
                     json.dump(data, f)
 
-                em = discord.Embed(title="Auroris Tickets", description="You have successfully removed `{}` from the list of roles that get pinged when new tickets are created.".format(role.name), color=0x00a8ff)
+                em = discord.Embed(title="Dave Bot", description="You have successfully removed `{}` from the list of roles that get pinged when new tickets are created.".format(role.name), color=0x00a8ff)
                 await ctx.send(embed=em)
             
             else:
-                em = discord.Embed(title="Auroris Tickets", description="That role already isn't getting pinged when new tickets are created!", color=0x00a8ff)
+                em = discord.Embed(title="Dave Bot", description="That role already isn't getting pinged when new tickets are created!", color=0x00a8ff)
                 await ctx.send(embed=em)
 
         except:
-            em = discord.Embed(title="Auroris Tickets", description="That isn't a valid role ID. Please try again with a valid role ID.")
+            em = discord.Embed(title="Dave Bot", description="That isn't a valid role ID. Please try again with a valid role ID.")
             await ctx.send(embed=em)
     
     else:
-        em = discord.Embed(title="Auroris Tickets", description="Sorry, you don't have permission to run that command.", color=0x00a8ff)
+        em = discord.Embed(title="Dave Bot", description="Sorry, you don't have permission to run that command.", color=0x00a8ff)
         await ctx.send(embed=em)
 
 
-@client.command()
+@slash.slash(description='Adds a role to the adminsetting of the tickets')
 @has_permissions(administrator=True)
 async def addadminrole(ctx, role_id=None):
     await ctx.message.delete()
@@ -605,14 +607,14 @@ async def addadminrole(ctx, role_id=None):
         with open('data.json', 'w') as f:
             json.dump(data, f)
         
-        em = discord.Embed(title="Auroris Tickets", description="You have successfully added `{}` to the list of roles that can run admin-level commands!".format(role.name), color=0x00a8ff)
+        em = discord.Embed(title="Dave Bot", description="You have successfully added `{}` to the list of roles that can run admin-level commands!".format(role.name), color=0x00a8ff)
         await ctx.send(embed=em)
 
     except:
-        em = discord.Embed(title="Auroris Tickets", description="That isn't a valid role ID. Please try again with a valid role ID.")
+        em = discord.Embed(title="Dave Bot", description="That isn't a valid role ID. Please try again with a valid role ID.")
         await ctx.send(embed=em)
 
-@client.command()
+@slash.slash(description='Deletes a role from the adminsettting of the tickets')
 @has_permissions(administrator=True)
 async def deladminrole(ctx, role_id=None):
     await ctx.message.delete()
@@ -635,16 +637,16 @@ async def deladminrole(ctx, role_id=None):
             with open('data.json', 'w') as f:
                 json.dump(data, f)
             
-            em = discord.Embed(title="Auroris Tickets", description="You have successfully removed `{}` from the list of roles that get pinged when new tickets are created.".format(role.name), color=0x00a8ff)
+            em = discord.Embed(title="Dave Bot", description="You have successfully removed `{}` from the list of roles that get pinged when new tickets are created.".format(role.name), color=0x00a8ff)
 
             await ctx.send(embed=em)
         
         else:
-            em = discord.Embed(title="Auroris Tickets", description="That role isn't getting pinged when new tickets are created!", color=0x00a8ff)
+            em = discord.Embed(title="Dave Bot", description="That role isn't getting pinged when new tickets are created!", color=0x00a8ff)
             await ctx.send(embed=em)
 
     except:
-        em = discord.Embed(title="Auroris Tickets", description="That isn't a valid role ID. Please try again with a valid role ID.")
+        em = discord.Embed(title="Dave Bot", description="That isn't a valid role ID. Please try again with a valid role ID.")
         await ctx.send(embed=em)
 
 

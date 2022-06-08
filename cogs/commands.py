@@ -1,5 +1,6 @@
 import discord, random
 from discord.ext import commands
+from discord_slash import SlashCommand
 
 client = commands.Bot(command_prefix = '!')
 
@@ -11,11 +12,12 @@ class commands(commands.Cog):
 
 
 	client = commands.Bot(command_prefix = '!')
+	slash = SlashCommand(client, sync_commands=True)
 
 #client Commands
 
 	#user defined commands !ping, !github, !ban user, etc
-	@client.command(aliases=['8 ball', '8ball', '8 Ball'])
+	@slash.slash(description='Magic 8 Ball Many Mystery')
 	async def _8ball(self, ctx, *, question):
 		await ctx.message.delete()
 		responses = ["As I see it, yes.", "Ask again later.", "Better not tell you now.",
@@ -28,12 +30,12 @@ class commands(commands.Cog):
 
 		await ctx.send(f'Question: [question]\nAnswer: {random.choice(responses)}')
 
-	@client.command(aliases=['Git', 'Github', 'github', 'github link'])
+	@slash.slash(description='Gives the GitHub Link')
 	async def git(self, ctx):
 		await ctx.message.delete()
 		await ctx.send(f'The Github link is: https://github.com/DustinFoes')
 	
-	@client.command()
+	@slash.slash(description='Gives the GitHub Repos')
 	async def gitrepos(self, ctx):
 		await ctx.message.delete()
 		repos = ['https://github.com/DustinFoes/DJANGOWEBSITE', 
@@ -47,12 +49,12 @@ class commands(commands.Cog):
 
 
 
-	@client.command()
+	@slash.slash(description='Sends a random number')
 	async def random(self, ctx):
 		n = random.randint(1, 9999)
-		ctx.send(f'{n}')
+		ctx.reply(f'{n}')
 
-	@client.command()
+	@slash.slash(description='Creates a Poll With 👍 & 👎')
 	async def thumbpoll(self,ctx,*,message):
 		await ctx.message.delete()
 		emb=discord.Embed(title='~~~~~~~~~~~~~\nPOLLTIME!\n~~~~~~~~~~~~~', description=f'{message}')
@@ -61,7 +63,7 @@ class commands(commands.Cog):
 		await msg.add_reaction('👎')
 
 
-	@client.command()
+	@slash.slash(description='Creates a Poll with 😍😐😡😥')
 	async def facepoll(self,ctx,*,message):
 		await ctx.message.delete()
 		emb=discord.Embed(title='~~~~~~~~~~~~~\nPOLLTIME!\n~~~~~~~~~~~~~', description=f'{message}')
