@@ -119,7 +119,7 @@ async def on_member_remove(member):
 @client.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
-        await ctx.send("I'm sorry, I Don't Recognize That Command. For Help, type !help")
+        await ctx.send("I'm sorry, I Don't Recognize That Command. For Help, type /help")
 
 
 #client commands
@@ -158,21 +158,18 @@ after clearall to specify the amount to clear'''
 @slash.slash(description='Loads a specifiec cog')
 @commands.check(server_owner)
 async def load(ctx, extension): #extension = the cog you want to load
-    await ctx.message.delete()
     client.load_extension(f'cogs.{extension}')
     await ctx.send(f'Cog has been loaded')
 
 @slash.slash(description='Unloads a specifiec cog')
 @commands.check(server_owner)
 async def unload(ctx, extension): #extension = the cog you want to load
-    await ctx.message.delete()
     client.unload_extension(f'cogs.{extension}')
     await ctx.send(f'Cog has been unloaded')    
 
 @slash.slash(description='Reloads a specific cog')
 @commands.check(server_owner)
 async def reload(ctx, extension):
-    #await ctx.message.delete()
     client.unload_extension(f'cogs.{extension}')
     client.load_extension(f'cogs.{extension}')
     await ctx.send(f'Cog has been reloaded')
@@ -200,7 +197,7 @@ async def slowmode_error(ctx, error):
     await ctx.send('An Unknown Error Occurred')
 
 
-@tasks.loop(minutes=5.0)
+@tasks.loop(hours = 2)
 async def send_message():
     channel = client.get_channel(TICKET_CHANNEL)
     await channel.send("Use !new to create a new ticket!\nUse !close to close the ticket")
@@ -239,8 +236,15 @@ async def unban(ctx, *, member):
             await ctx.send(f'Unnbanned: {user.name}#{user.discriminator}')
             return
 
-
+@slash.slash(description='Shows The Davebot Weblink')
+async def DaveSite(ctx):
+    em = discord.Embed(title="Dave Bot Site", url="https://stonercraft.online", color=0xc44800)
+    await ctx.reply(embed=em)
     
+@slash.slash(description='Shows The Davebot WikiLink')
+async def wiki(ctx):
+    em = discord.Embed(title="Dave Bot Wiki", url="https://stonercraft.online/dave-info", color=0xc44800)
+    await ctx.reply(embed=em)
 
 
 @slash.slash(description='Displays the Admin Help Menu')
@@ -253,8 +257,6 @@ async def adminhelp(ctx):
         em = discord.Embed(title="Dave Bot Help", description="", color=0xc44800)
         em.add_field(name="`!clearall`", value="This command will delete the last 999 messages in the channel.")
         em.add_field(name="`!clear <value>`", value="This command will delete the specified number of messages from a channel. Default = 5")
-        em.add_field(name="`!new <message>`", value="This creates a new ticket. Add any words after the command if you'd like to send a message when we initially create your ticket.")
-        em.add_field(name="`!close`", value="Use this to close a ticket. This command only works in ticket channels.")
         em.add_field(name="`!addaccess <role_id>`", value="This can be used to give a specific role access to all tickets. This command can only be run if you have an admin-level role for this bot.")
         em.add_field(name="`!delaccess <role_id>`", value="This can be used to remove a specific role's access to all tickets. This command can only be run if you have an admin-level role for this bot.")
         em.add_field(name="`!addpingedrole <role_id>`", value="This command adds a role to the list of roles that are pinged when a new ticket is created. This command can only be run if you have an admin-level role for this bot.")
@@ -291,7 +293,7 @@ async def help(ctx):
 
         await ctx.reply(embed=em)
 
-@slash.slash(description='creates a new help ticket')
+@client.command()
 async def new(ctx, *, args = None):
     await ctx.message.delete()
     await client.wait_until_ready()
@@ -353,7 +355,7 @@ async def new(ctx, *, args = None):
     
     await ctx.send(embed=created_em)
 
-@slash.slash(description='Closes a ticket')
+@client.command()
 async def close(ctx):
     await ctx.message.delete()
     with open('data.json') as f:
@@ -648,6 +650,11 @@ async def deladminrole(ctx, role_id=None):
     except:
         em = discord.Embed(title="Dave Bot", description="That isn't a valid role ID. Please try again with a valid role ID.")
         await ctx.send(embed=em)
+
+@slash.slash(description='Displays the DaveBot Invite Link')
+async def invite(ctx, role_id=None):
+    em = discord.Embed(title="Dave Bot Invite Link", url="https://discord.com/api/oauth2/authorize?client_id=974710577832284170&permissions=8&scope=bot%20applications.commands", color=0xc44800)
+    await ctx.reply(embed=em)
 
 
 
