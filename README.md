@@ -1,8 +1,9 @@
-# Dave Bot
+# [Dave Bot](https://stonercraft.online/)
 Dave Bot is a general use Discord bot made with Discord.py usingn Python3.10. This bot will have variety of functions and commands that will help anyone who is running a discord server with features like polls, python error detection, ticketing system, and more!
 ## Description
 I started this as my first ever discord bot. As I started learning more and more I just wanted to add more things all the time. I thought that I would share this with anyone who may want to use this bot for their own purposes, or help add to the project. Over time I hope to add much more to the bot and continue making improvements. If you have any questions please visit my discord channel. https://discord.gg/mBmX292QnG
 
+# [Dave Bot Website](https://stonercraft.online/)
 
 ## Getting Started
 ### Dependencies
@@ -12,7 +13,8 @@ I started this as my first ever discord bot. As I started learning more and more
 ### Installing
 - You can download from: https://github.com/DustinFoes/Dave-Bot/archive/refs/heads/master.zip
 - Make sure to replace the bot Token and channel / user IDs with your own where necessary.
-### [TURORIAL](https://youtu.be/b0G2FfZy-Y4)
+### [Tutorial](https://youtu.be/b0G2FfZy-Y4)
+### [Text Tutorial](https://stonercraft.online/how-to-install-dave-bot)
 [![Thumb](https://user-images.githubusercontent.com/105510092/172236970-03583d1e-21ee-457f-ad2f-caf867e60a29.PNG)](https://youtu.be/b0G2FfZy-Y4)
 
 
