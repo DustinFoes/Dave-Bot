@@ -2,8 +2,6 @@ import discord, random
 from discord.ext import commands
 from discord_slash import SlashCommand
 
-client = commands.Bot(command_prefix = '!')
-
 class commands(commands.Cog):
 
 	def __init__(self, client):
@@ -11,7 +9,7 @@ class commands(commands.Cog):
 	
 
 
-	client = commands.Bot(command_prefix = '!')
+	client = commands.Bot(command_prefix=commands.when_mentioned_or('!'))
 	slash = SlashCommand(client, sync_commands=True)
 
 #client Commands

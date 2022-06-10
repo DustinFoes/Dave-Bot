@@ -59,17 +59,17 @@ class CustomHelpCommand(commands.HelpCommand):
 
 
 
-
-
-
-
-prefix = '!'
-client = commands.Bot(command_prefix = prefix, HelpCommand=CustomHelpCommand())
-status = cycle(['Valorant', 'Your Mom'])
+client = commands.Bot(command_prefix=commands.when_mentioned_or('!'))
 slash = SlashCommand(client, sync_commands=True)
+status = cycle(['Valorant', 'Your Mom'])
+
 
 
 client.remove_command("help")
+
+for filename in os.listdir('./cogs'):
+    if filename.endswith('.py'):
+        client.load_extension(f'cogs.{filename[:-3]}')
 
 def server_owner(ctx):
     return ctx.author.id == OWNER_ID # <--- This sets a master user to have access to specific functions.
@@ -655,11 +655,5 @@ async def deladminrole(ctx, role_id=None):
 async def invite(ctx, role_id=None):
     em = discord.Embed(title="Dave Bot Invite Link", url="https://discord.com/api/oauth2/authorize?client_id=974710577832284170&permissions=8&scope=bot%20applications.commands", color=0xc44800)
     await ctx.reply(embed=em)
-
-
-
-for filename in os.listdir('./cogs'):
-    if filename.endswith('.py'):
-        client.load_extension(f'cogs.{filename[:-3]}')
 
 client.run(TOKEN)
