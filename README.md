@@ -5,6 +5,9 @@ I started this as my first ever discord bot. As I started learning more and more
 
 # [Dave Bot Website](https://stonercraft.online/)
 
+# Discord.py Version: 1.7.3
+# Discord.py Version: 2.0 Update In Progress
+
 ## Getting Started
 ### Dependencies
 - Python3
