@@ -365,3 +365,5 @@ FodyWeavers.xsd
 /config.json
 /Tests
 /dashboard.py
+/env
+/davebot-cord

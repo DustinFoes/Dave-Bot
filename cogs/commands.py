@@ -17,21 +17,20 @@ class commands(commands.Cog):
 	#user defined commands !ping, !github, !ban user, etc
 	@slash.slash(description='Magic 8 Ball Many Mystery')
 	async def _8ball(self, ctx, *, question):
-		await ctx.message.delete()
 		responses = ["As I see it, yes.", "Ask again later.", "Better not tell you now.",
-		 	"Cannot predict now.", "Concentrate and ask again.",
+		 			"Cannot predict now.", "Concentrate and ask again.",
 	             	"Don’t count on it.", "It is certain.", "It is decidedly so.",
 	             	 "Most likely.", "My reply is no.", "My sources say no.",
 	            	 "Outlook not so good.", "Outlook good.", "Reply hazy, try again.",
 	            	  "Signs point to yes.", "Very doubtful.", "Without a doubt.",
 	            	 "Yes.", "Yes – definitely.", "You may rely on it."]
 
-		await ctx.send(f'Question: [question]\nAnswer: {random.choice(responses)}')
+		await ctx.reply(f'Question: [question]\nAnswer: {random.choice(responses)}')
 
 	@slash.slash(description='Gives the GitHub Link')
 	async def git(self, ctx):
 		await ctx.message.delete()
-		await ctx.send(f'The Github link is: https://github.com/DustinFoes')
+		await ctx.reply(f'The Github link is: https://github.com/DustinFoes')
 	
 	@slash.slash(description='Gives the GitHub Repos')
 	async def gitrepos(self, ctx):
@@ -41,7 +40,7 @@ class commands(commands.Cog):
 		'https://github.com/DustinFoes/password-creator',
 		'https://github.com/DustinFoes/Calculator-App',
 		'https://github.com/DustinFoes/DiscordBotDave']
-		await ctx.send(f'Github Repositories: {repos}')
+		await ctx.reply(f'Github Repositories: {repos}')
 
 
 
