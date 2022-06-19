@@ -7,7 +7,6 @@ import traceback
 import logging
 import datetime
 from discord.ext.commands import has_permissions, MissingPermissions
-from discord_slash import SlashCommand
 import asyncio
 
 
@@ -18,7 +17,7 @@ if os.path.exists(os.getcwd() + '/config.json'):
 	with open('./config.json') as f:
 		configData = json.load(f)
 else:
-	configTemplate = {'TOKEN': '', 'OWNER_ID': ''}
+	configTemplate = {'TOKEN': '', 'OWNER_ID': '', 'Ticket_Channnel': '', 'category': ''}
 
 	with open(os.getcwd() + '/config.json', 'w+') as f:
 		json.dump(configTemplate, f)
@@ -655,5 +654,7 @@ async def deladminrole(ctx, role_id=None):
 async def invite(ctx, role_id=None):
     em = discord.Embed(title="Dave Bot Invite Link", url="https://discord.com/api/oauth2/authorize?client_id=974710577832284170&permissions=8&scope=bot%20applications.commands", color=0xc44800)
     await ctx.reply(embed=em)
+
+
 
 client.run(TOKEN)
