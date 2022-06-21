@@ -10,7 +10,15 @@ from discord.ext.commands import has_permissions, MissingPermissions
 import asyncio
 
 
-
+print("//////////////////////////////////////////////////////////")
+print("//                                                      //")
+print("//        * *      * *    *     *  * * * *              //")
+print("//        *   *  *     *  *     *  *                    //")
+print("//        *   *  * *** *   *   *   * * *                //")
+print("//        *   *  *     *    * *    *                    //")
+print("//        * *    *     *     *     * * * * *            //")
+print("//                                                      //")
+print("//////////////////////////////////////////////////////////")
 
 
 if os.path.exists(os.getcwd() + '/config.json'):
@@ -254,20 +262,20 @@ async def adminhelp(ctx):
 
 
         em = discord.Embed(title="Dave Bot Help", description="", color=0xc44800)
-        em.add_field(name="`!clearall`", value="This command will delete the last 999 messages in the channel.")
-        em.add_field(name="`!clear <value>`", value="This command will delete the specified number of messages from a channel. Default = 5")
-        em.add_field(name="`!addaccess <role_id>`", value="This can be used to give a specific role access to all tickets. This command can only be run if you have an admin-level role for this bot.")
-        em.add_field(name="`!delaccess <role_id>`", value="This can be used to remove a specific role's access to all tickets. This command can only be run if you have an admin-level role for this bot.")
-        em.add_field(name="`!addpingedrole <role_id>`", value="This command adds a role to the list of roles that are pinged when a new ticket is created. This command can only be run if you have an admin-level role for this bot.")
-        em.add_field(name="`!delpingedrole <role_id>`", value="This command removes a role from the list of roles that are pinged when a new ticket is created. This command can only be run if you have an admin-level role for this bot.")
-        em.add_field(name="`!addadminrole <role_id>`", value="This command gives all users with a specific role access to the admin-level commands for the bot, such as `.addpingedrole` and `.addaccess`. This command can only be run by users who have administrator permissions for the entire server.")
-        em.add_field(name="`!deladminrole <role_id>`", value="This command removes access for all users with the specified role to the admin-level commands for the bot, such as `.addpingedrole` and `.addaccess`. This command can only be run by users who have administrator permissions for the entire server.")
-        em.add_field(name="`!load <cogname>`", value="This command will load the given cog.")
-        em.add_field(name="`!unload <cogname>`", value="This command will unload the given cog.")
-        em.add_field(name="`!reload <cogname>`", value="This command will reload the given cog.")
-        em.add_field(name="`!slowmode <seconds>`", value="This command will enable slowmode for x amount of seconds.")
-        em.add_field(name="`!help`", value="This command will display the normal help menu")
-        em.add_field(name="`!adminhelp`", value="This command will display this menu")
+        em.add_field(name="`/clearall`", value="This command will delete the last 999 messages in the channel.")
+        em.add_field(name="`/clear <value>`", value="This command will delete the specified number of messages from a channel. Default = 5")
+        em.add_field(name="`/addaccess <role_id>`", value="This can be used to give a specific role access to all tickets. This command can only be run if you have an admin-level role for this bot.")
+        em.add_field(name="`/delaccess <role_id>`", value="This can be used to remove a specific role's access to all tickets. This command can only be run if you have an admin-level role for this bot.")
+        em.add_field(name="`/addpingedrole <role_id>`", value="This command adds a role to the list of roles that are pinged when a new ticket is created. This command can only be run if you have an admin-level role for this bot.")
+        em.add_field(name="`/delpingedrole <role_id>`", value="This command removes a role from the list of roles that are pinged when a new ticket is created. This command can only be run if you have an admin-level role for this bot.")
+        em.add_field(name="`/addadminrole <role_id>`", value="This command gives all users with a specific role access to the admin-level commands for the bot, such as `.addpingedrole` and `.addaccess`. This command can only be run by users who have administrator permissions for the entire server.")
+        em.add_field(name="`/deladminrole <role_id>`", value="This command removes access for all users with the specified role to the admin-level commands for the bot, such as `.addpingedrole` and `.addaccess`. This command can only be run by users who have administrator permissions for the entire server.")
+        em.add_field(name="`/load <cogname>`", value="This command will load the given cog.")
+        em.add_field(name="`/unload <cogname>`", value="This command will unload the given cog.")
+        em.add_field(name="`/reload <cogname>`", value="This command will reload the given cog.")
+        em.add_field(name="`/slowmode <seconds>`", value="This command will enable slowmode for x amount of seconds.")
+        em.add_field(name="`/help`", value="This command will display the normal help menu")
+        em.add_field(name="`/adminhelp`", value="This command will display this menu")
         em.set_footer(text="Dave Bot")
 
         await ctx.reply(embed=em)
@@ -280,14 +288,14 @@ async def help(ctx):
 
 
         em = discord.Embed(title="Dave Bot Admin Help", description="", color=0x22fc00)
-        em.add_field(name="`!new <message>`", value="This creates a new ticket. Add any words after the command if you'd like to send a message when we initially create your ticket.")
-        em.add_field(name="`!close`", value="Use this to close a ticket. This command only works in ticket channels.")
-        em.add_field(name="`!8ball <question>`", value="Ask the 8 ball a question.")
-        em.add_field(name="`!git`", value="This command will send a msg with the git link")
-        em.add_field(name="`!gitrepos`", value="This command will display the repos in my git")
-        em.add_field(name="`!random`", value="This command will give a random 4 digit number")
-        em.add_field(name="`!help`", value="This command will display this menu")
-        em.add_field(name="`!adminhelp`", value="This command will display th menu")
+        em.add_field(name="`/new <message>`", value="This creates a new ticket. Add any words after the command if you'd like to send a message when we initially create your ticket.")
+        em.add_field(name="`/close`", value="Use this to close a ticket. This command only works in ticket channels.")
+        em.add_field(name="`/8ball <question>`", value="Ask the 8 ball a question.")
+        em.add_field(name="`/git`", value="This command will send a msg with the git link")
+        em.add_field(name="`/gitrepos`", value="This command will display the repos in my git")
+        em.add_field(name="`/random`", value="This command will give a random 4 digit number")
+        em.add_field(name="`/help`", value="This command will display this menu")
+        em.add_field(name="`/adminhelp`", value="This command will display th menu")
         em.set_footer(text="Dave Bot")
 
         await ctx.reply(embed=em)
