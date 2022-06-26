@@ -29,7 +29,7 @@ class discord_py_errors(commands.Cog):
 			em = discord.Embed(
 				title="Coding Error Detection", 
 				descrption="This is usually due to use of inconstant tabs and spaces. Note: Lately people have noticed when copy pasting code from the internet, this will insert the code with the opposite indentation that is of the current file.",
-				color=0x22FC00
+				color=0x22FC00,
 			)
 			
 			
@@ -40,7 +40,7 @@ class discord_py_errors(commands.Cog):
 				title="Coding Error Detection", 
 				description="If your bot does not respond to an interaction within 3 seconds, the interaction will fail (although not necessarily an error has occured in your application). You can defer if you know it will take longer time.",
 				url='https://stackoverflow.com/questions/70996186/the-application-did-not-respond-error-while-making-a-slash-command-using-disco#:~:text=If%20your%20bot%20does%20not%20respond%20to%20an%20interaction%20within%203%20seconds%2C%20the%20interaction%20will%20fail%20(although%20not%20necessarily%20an%20error%20has%20occured%20in%20your%20application).%20You%20can%20defer%20if%20you%20know%20it%20will%20take%20longer%20time.',
-				color=0x22FC00
+				color=0x22FC00,
 			)
 			em.add_field(
 				name="the application did not respond",
@@ -65,7 +65,7 @@ class discord_py_errors(commands.Cog):
 			em = discord.Embed(
 				title="Coding Error Detection",
 				url="https://stackoverflow.com/questions/64231025/discord-py-bot-cant-see-members",
-				color=0x22FC00
+				color=0x22FC00,
 			)
 			em.add_field(
 				name="How to Fix: Bot Cant See Errors",
@@ -77,7 +77,7 @@ class discord_py_errors(commands.Cog):
 			em = discord.Embed(
 				title="Coding Error Detection", 
 				description="",
-				url="https://stackoverflow.com/questions/63027848/discord-py-error-typeerror-new-got-an-unexpected-keyword-argument-deny"
+				url="https://stackoverflow.com/questions/63027848/discord-py-error-typeerror-new-got-an-unexpected-keyword-argument-deny",
 				color=0x22FC00,
 			)
 			em.add_field(
@@ -90,7 +90,7 @@ class discord_py_errors(commands.Cog):
 			em = discord.Embed(
 				title="Coding Error Detection", 
 				url="https://stackoverflow.com/questions/43948454/python-invalid-syntax-with-async-def",
-				color=0x22FC00
+				color=0x22FC00,
 			)
 			em.add_field(
 				name="How to Fix: Invalid Syntax With Async Def",
@@ -102,7 +102,7 @@ class discord_py_errors(commands.Cog):
 			em = discord.Embed(
 				title="Coding Error Detection", 
 				url='https://stackoverflow.com/questions/49331096/why-does-on-message-stop-commands-from-working',
-				color=0x22FC00
+				color=0x22FC00,
 			)
 			em.add_field(
 				name="How to Fix: on_message Stops Commands From Working",
@@ -114,7 +114,7 @@ class discord_py_errors(commands.Cog):
 			em = discord.Embed(
 				title="Coding Error Detection", 
 				url="https://stackoverflow.com/questions/44862112/how-can-i-send-an-embed-via-my-discord-bot-w-python",
-				color=0x22FC00
+				color=0x22FC00,
 			)
 			em.add_field(
 				name="How To Send an Embed",
