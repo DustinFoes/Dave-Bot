@@ -78,7 +78,7 @@ class discord_py_errors(commands.Cog):
 				title="Coding Error Detection", 
 				description="",
 				url="https://stackoverflow.com/questions/63027848/discord-py-error-typeerror-new-got-an-unexpected-keyword-argument-deny"
-				color=0x22FC00
+				color=0x22FC00,
 			)
 			em.add_field(
 				name="deny_new",
