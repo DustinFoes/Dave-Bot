@@ -128,4 +128,4 @@ class discord_py_errors(commands.Cog):
 # \\\-------------------------------------------------------------------------------------///
 
 def setup(client):
-	client.add_cog(discord_py_errors(errors))
+	client.add_cog(discord_py_errors(discord_py_errors))
