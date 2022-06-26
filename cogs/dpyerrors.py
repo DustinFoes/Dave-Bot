@@ -23,7 +23,7 @@ class discord_py_errors(commands.Cog):
 
 
 
-@commands.Cog.listener()
+	@commands.Cog.listener()
 	async def on_message(self, message):
 		if "indentation error" in message.content:
 			em = discord.Embed(
@@ -37,7 +37,7 @@ class discord_py_errors(commands.Cog):
 				color=0x22FC00,
 			)
 			await message.channel.send(embed=em)
-
+	
 		elif "application did not respond" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", 
@@ -50,7 +50,7 @@ class discord_py_errors(commands.Cog):
 				url='https://stackoverflow.com/questions/70996186/the-application-did-not-respond-error-while-making-a-slash-command-using-disco#:~:text=If%20your%20bot%20does%20not%20respond%20to%20an%20interaction%20within%203%20seconds%2C%20the%20interaction%20will%20fail%20(although%20not%20necessarily%20an%20error%20has%20occured%20in%20your%20application).%20You%20can%20defer%20if%20you%20know%20it%20will%20take%20longer%20time.',
 			)
 			await message.channel.send(embed=em)
-
+	
 		elif "spaces in an argument" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection",  
@@ -62,7 +62,7 @@ class discord_py_errors(commands.Cog):
 				url="https://stackoverflow.com/questions/56006198/is-there-a-way-to-include-spaces-in-my-argument?rq=1#:~:text=You%20have%20a%20few%20options%3A",
 			)
 			await message.channel.send(embed=em)
-
+	
 		elif "bot cant see members" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection",
@@ -73,7 +73,7 @@ class discord_py_errors(commands.Cog):
 				url="https://stackoverflow.com/questions/64231025/discord-py-bot-cant-see-members",
 			)
 			await message.channel.send(embed=em)
-
+	
 		elif "argument 'deny_new'" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", 
@@ -86,7 +86,7 @@ class discord_py_errors(commands.Cog):
 				url="https://stackoverflow.com/questions/63027848/discord-py-error-typeerror-new-got-an-unexpected-keyword-argument-deny"
 			)
 			await message.channel.send(embed=em)
-
+	
 		elif "invalid syntax with async def" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", 
@@ -98,7 +98,7 @@ class discord_py_errors(commands.Cog):
 				url="https://stackoverflow.com/questions/43948454/python-invalid-syntax-with-async-def",
 			)
 			await message.channel.send(embed=em)
-
+	
 		elif "on_message stops commands from working" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", 
@@ -110,7 +110,7 @@ class discord_py_errors(commands.Cog):
 				description="",
 			)
 			await message.channel.send(embed=em)
-
+	
 		elif "how to send an embed" in message.content:
 			em = discord.Embed(
 				title="Coding Error Detection", 
