@@ -1,7 +1,10 @@
 import discord
 from discord.ext import commands, tasks
+from discord_slash import SlashCommand
 
 
+'''Simple Bot That Listens for common error names like syntax error, then displays information about the error type. This can be useful when
+	someone is posting lines of code in request for help.'''
 
 
 class errors(commands.Cog):
@@ -11,7 +14,66 @@ class errors(commands.Cog):
 	
 
 
-	client = commands.Bot(command_prefix = '!')
+	client = commands.Bot(command_prefix = '')
+	slash = SlashCommand(client, sync_commands=True)
+
+
+
+
+
+# /// CLIENT COMMANDS \\\
+
+
+
+	@slash.slash(description='Lists the different types of Python errors')
+	async def Error_Types(self, ctx):
+		emb=discord.Embed(title='Error Types', url='https://www.tutorialsteacher.com/python/error-types-in-python')
+
+		emb.add_field(title='IndexError', 
+			description='The IndexError is thrown when trying to access an item at an invalid index.', 
+			url='https://www.tutorialsteacher.com/python/error-types-in-python#:~:text=operation%20is%20zero.-,IndexError,-The%20IndexError%20is')
+
+		emb.add_field(title='ModuleNotFoundError', 
+			description='The ModuleNotFoundError is thrown when a module could not be found.', 
+			url='https://www.tutorialsteacher.com/python/error-types-in-python#:~:text=out%20of%20range-,ModuleNotFoundError,-The%20ModuleNotFoundError%20is')
+
+		emb.add_field(title='KeyError', 
+			description='The KeyError is thrown when a key is not found.', 
+			url='https://www.tutorialsteacher.com/python/error-types-in-python#:~:text=named%20%27notamodule%27-,KeyError,-The%20KeyError%20is')
+
+		emb.add_field(title='ImportError', 
+			description='The ImportError is thrown when a specified function can not be found.', 
+			url='https://www.tutorialsteacher.com/python/error-types-in-python#:~:text=%3A%20%274%27-,ImportError,-The%20ImportError%20is')
+
+		emb.add_field(title='StopIteration', 
+			description='The StopIteration is thrown when the next() function goes beyond the iterator items.', 
+			url='https://www.tutorialsteacher.com/python/error-types-in-python#:~:text=name%20%27cube%27-,StopIteration,-The%20StopIteration%20is')
+
+		emb.add_field(title='TypeError', 
+			description='The TypeError is thrown when an operation or function is applied to an object of an inappropriate type.', 
+			url='https://www.tutorialsteacher.com/python/error-types-in-python#:~:text=it)%0AStopIteration-,TypeError,-The%20TypeError%20is')
+
+		emb.add_field(title='ValueError', 
+			description="The ValueError is thrown when a function's argument is of an inappropriate type.", 
+			url='https://www.tutorialsteacher.com/python/error-types-in-python#:~:text=%2C%20not%20int-,ValueError,-The%20ValueError%20is')
+
+		emb.add_field(title='NameError', 
+			description='The NameError is thrown when an object could not be found.', 
+			url='https://www.tutorialsteacher.com/python/error-types-in-python#:~:text=%3A%20%27xyz%27-,NameError,-The%20NameError%20is')
+
+		emb.add_field(title='ZeroDivisionError', 
+			description='The ZeroDivisionError is thrown when the second operator in the division is zero.', 
+			url='https://www.tutorialsteacher.com/python/error-types-in-python#:~:text=is%20not%20defined-,ZeroDivisionError,-The%20ZeroDivisionError%20is')
+
+		emb.add_field(title='KeyboardInterrupt', 
+			description='KeyboardInterrupt', 
+			url='https://www.tutorialsteacher.com/python/error-types-in-python#:~:text=division%20by%20zero-,KeyboardInterrupt,-The%20KeyboardInterrupt%20is')
+
+
+		msg=await ctx.channel.send(embed=emb)
+
+
+# /// PYTHON ERRORS \\\
 
 	@commands.Cog.listener()
 	async def on_message(self, message):
