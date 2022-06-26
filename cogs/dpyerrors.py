@@ -33,7 +33,6 @@ class discord_py_errors(commands.Cog):
 			)
 			em.add_field(
 				name="Indentation Error",
-				color=0x22FC00,
 			)
 			await message.channel.send(embed=em)
 	
